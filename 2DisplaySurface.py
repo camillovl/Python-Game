@@ -13,7 +13,7 @@ def display_score():
 def obstacle_movement(obstacle_list):
     if obstacle_list:
         for obstacle_rect in obstacle_list:
-            obstacle_rect.x -= 4
+            obstacle_rect.x -= 5
 
             if obstacle_rect.bottom == 550:
                 # pygame.draw.rect(screen,'Blue',obstacle_rect)
@@ -21,7 +21,7 @@ def obstacle_movement(obstacle_list):
                 screen.blit(snake_frames[snake_index], obstacle_rect)
                 
             else:                
-                pygame.draw.rect(screen,'Blue',obstacle_rect)
+                #pygame.draw.rect(screen,'Blue',obstacle_rect)
                 # screen.blit(stirge_surface,obstacle_rect)               
                 screen.blit(stirge_frames[stirge_index], obstacle_rect)               
                 
@@ -91,9 +91,17 @@ score_rect = score_surface.get_rect(topleft = (320,47 ))
 
 #obstacles
 snake_frame1 = pygame.image.load('Snake\Cobra 1.png').convert_alpha()
+snake_frame1 = pygame.transform.scale(snake_frame1,(40,40))
+
 snake_frame2 = pygame.image.load('Snake\Cobra 2.png').convert_alpha()
+snake_frame2 = pygame.transform.scale(snake_frame2,(40,40))
+
 snake_frame3 = pygame.image.load('Snake\Cobra 3.png').convert_alpha()
+snake_frame3 = pygame.transform.scale(snake_frame3,(40,40))
+
 snake_frame4 = pygame.image.load('Snake\Cobra 4.png').convert_alpha()
+snake_frame4 = pygame.transform.scale(snake_frame4,(40,40))
+
 snake_index = 0
 snake_frames = [snake_frame1, snake_frame2, snake_frame3, snake_frame4]
 
@@ -103,13 +111,16 @@ snake_surface = snake_frames[snake_index]
 
 #Stirge
 stirge_frame1 = pygame.image.load('1.png').convert_alpha()
+stirge_frame1 = pygame.transform.scale(stirge_frame1,(50,50))
 stirge_frame2 = pygame.image.load('2.png').convert_alpha()
+stirge_frame2 = pygame.transform.scale(stirge_frame2,(50,50))
 stirge_index = 0
 stirge_frames = [stirge_frame1, stirge_frame2]
 
 stirge_surface = stirge_frames[stirge_index]
 
-#stirge_surface = pygame.transform.scale(stirge_surface,(30,25))
+#stirge_frames[stirge_index] = pygame.transform.scale(stirge_surface,(30,25))
+
 
 obstacle_rect_list = []
 
@@ -145,18 +156,18 @@ player_gravity = 0
 player_stand = pygame.image.load('WalkKing\Stand.png').convert_alpha()
 player_stand = pygame.transform.rotozoom(player_stand,0,3)
 #player_stand =pygame.transform.scale(player_stand,(200,150))
-player_stand_rect = player_stand.get_rect(center = (500,325))
+player_stand_rect = player_stand.get_rect(center = (400,325))
 
 #intro texts
-intro_text = test_font.render('Press R to start the game', False, 'Black')
-intro_rect = intro_text.get_rect(center = (500,200))
+intro_text = test_font.render('Press Enter to start the game', False, 'Black')
+intro_rect = intro_text.get_rect(center = (420,200))
 
 #Timer
 obstacle_timer = pygame.USEREVENT + 1
 pygame.time.set_timer(obstacle_timer,1400) # a timer ta trigger something every 900 miliseconds
 
 snake_animation_timer = pygame.USEREVENT + 2
-pygame.time.set_timer(snake_animation_timer,1500)
+pygame.time.set_timer(snake_animation_timer,100)
 
 stirge_animation_timer = pygame.USEREVENT + 3
 pygame.time.set_timer(stirge_animation_timer,200)
@@ -177,7 +188,7 @@ while True:
         if game_active == True:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and player_rect.bottom >= 550:
-                    player_gravity = -15
+                    player_gravity = -17
             
             # code to clik on the player to jump if necessary
 
@@ -186,7 +197,7 @@ while True:
                     #player_gravity = -20
         else:
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_r:
+                if event.key == pygame.K_RETURN:
                     game_active = True
                     #snake_rect.left = 800
                     start_time = int(pygame.time.get_ticks() /100)
@@ -196,7 +207,7 @@ while True:
                 if randint(0,2):#random statment that triggers true or false (0 or 1)
                     obstacle_rect_list.append(snake_frames[snake_index].get_rect(bottomright = (randint(1100,1200),550)))
                 else:
-                    obstacle_rect_list.append(stirge_frames[stirge_index].get_rect(bottomright = (randint(1100,1200),530)))
+                    obstacle_rect_list.append(stirge_frames[stirge_index].get_rect(bottomright = (randint(1100,1200),515)))
                     #print('test')
     
             if event.type == snake_animation_timer and game_active == True:
