@@ -33,6 +33,9 @@ class Player(pygame.sprite.Sprite):
         #self.player_surface_jump = player_jump[player_index_jump]
         
         self.image_jump = self.player_jump[self.player_index_jump]
+
+        self.jump_sound = pygame.mixer.Sound('Jump.wav')
+        self.jump_sound.set_volume(0.5)
     
     
     def player_animation(self):
@@ -53,6 +56,7 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and self.rect.bottom >= 550:
             self.gravity = -17
+            self.jump_sound.play()
 
 
     
@@ -179,6 +183,10 @@ clock = pygame.time.Clock()
 test_font = pygame.font.Font('Pixeltype.ttf',30) #font type and font size
 game_active = False
 start_time = 0
+bg_music = pygame.mixer.Sound('backgroudmusic.wav')
+bg_music.set_volume(0.2)
+bg_music.play(loops = -1) #plays the sound 4ever
+
 
 #GROUPS
 player = pygame.sprite.GroupSingle() #this is a group single
@@ -187,8 +195,8 @@ player.add(Player()) #this is a sprite
 obstacle_group = pygame.sprite.Group()
 
 
-#background_surface = pygame.image.load('backgrounds.png').convert_alpha() #converting an image to alpha facilitates pygame to read the code and make it lighter
-
+background_surface = pygame.image.load('Backgrounds.png').convert_alpha() #converting an image to alpha facilitates pygame to read the code and make it lighter
+background_surface = pygame.transform.scale(background_surface,(800,600))
 title0_surface = pygame.image.load('Tiles\Dois.png').convert_alpha()
 title1_surface = pygame.image.load('Tiles\Dois.png').convert_alpha()
 title2_surface = pygame.image.load('Tiles\Dois.png').convert_alpha()
@@ -332,7 +340,9 @@ while True:
                 
     if game_active == True:
     #background
-        screen.fill((255,255,255))
+
+        screen.blit(background_surface,(0,0))
+        #screen.fill((255,255,255))
         #screen.blit(background_surface,(0,0))
     #Ground
         screen.blit(title0_surface,(0,550))  #blit is used when you want to put a surface in another surface    

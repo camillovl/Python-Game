@@ -70,40 +70,28 @@ class Player(pygame.sprite.Sprite):
         self.player_animation()
 
 class Obstacle(pygame.sprite.Sprite):
-    def __init__(self,type):
+    def __init__(self):
         super().__init__()
 
-        if type == 'stirge':
-            stirge_frame1 = pygame.image.load('1.png').convert_alpha()
-            stirge_frame1 = pygame.transform.scale(stirge_frame1,(50,50))
-            stirge_frame2 = pygame.image.load('2.png').convert_alpha()      
-            stirge_frame2 = pygame.transform.scale(stirge_frame2,(50,50))
+        stirge_frame1 = pygame.image.load('1.png').convert_alpha()
+        stirge_frame1 = pygame.transform.scale(stirge_frame1,(50,50))
+        stirge_frame2 = pygame.image.load('2.png').convert_alpha()      
+        stirge_frame2 = pygame.transform.scale(stirge_frame2,(50,50))
 
-            #stirge_index = 0
-            self.frames = [stirge_frame1, stirge_frame2]
-            #stirge_surface = stirge_frames[stirge_index]
-            y_pos = 515
-        else:
-            snake_frame1 = pygame.image.load('Snake\Cobra 1.png').convert_alpha()
-            snake_frame1 = pygame.transform.scale(snake_frame1,(40,40))
+            
+        snake_frame1 = pygame.image.load('Snake\Cobra 1.png').convert_alpha()
+        snake_frame1 = pygame.transform.scale(snake_frame1,(40,40))
 
-            snake_frame2 = pygame.image.load('Snake\Cobra 2.png').convert_alpha()
-            snake_frame2 = pygame.transform.scale(snake_frame2,(40,40))
+        snake_frame2 = pygame.image.load('Snake\Cobra 2.png').convert_alpha()
+        snake_frame2 = pygame.transform.scale(snake_frame2,(40,40))
 
-            snake_frame3 = pygame.image.load('Snake\Cobra 3.png').convert_alpha()
-            snake_frame3 = pygame.transform.scale(snake_frame3,(40,40))
+        snake_frame3 = pygame.image.load('Snake\Cobra 3.png').convert_alpha()
+        snake_frame3 = pygame.transform.scale(snake_frame3,(40,40))
 
-            snake_frame4 = pygame.image.load('Snake\Cobra 4.png').convert_alpha()
-            snake_frame4 = pygame.transform.scale(snake_frame4,(40,40))
+        snake_frame4 = pygame.image.load('Snake\Cobra 4.png').convert_alpha()
+        snake_frame4 = pygame.transform.scale(snake_frame4,(40,40))
 
-            #snake_index = 0
-            self.frames = [snake_frame1, snake_frame2, snake_frame3, snake_frame4]
-            #snake_surface = snake_frames[snake_index]
-            y_pos = 550
 
-        self.animation_index = 0
-        self.image = self.frames[self.animation_index]
-        self.rect = self.image.get_rect(midbottom = (random.randint(900,1100),y_pos))
     
     def animation_state(self):
         self.animation_index += 0.1
@@ -129,37 +117,31 @@ def display_timer():
     screen.blit(timer_surface,timer_rect)
     #print(current_time)
 
-def obstacle_movement(obstacle_list):
-    if obstacle_list:
-        for obstacle_rect in obstacle_list:
-            obstacle_rect.x -= 5
+# def obstacle_movement(obstacle_list):
+#     if obstacle_list:
+#         for obstacle_rect in obstacle_list:
+#             obstacle_rect.x -= 5
 
-            if obstacle_rect.bottom == 550:
-                # pygame.draw.rect(screen,'Blue',obstacle_rect)
-                # screen.blit(snake_surface,obstacle_rect)
-                screen.blit(snake_frames[snake_index], obstacle_rect)
+#             if obstacle_rect.bottom == 550:
+#                 # pygame.draw.rect(screen,'Blue',obstacle_rect)
+#                 # screen.blit(snake_surface,obstacle_rect)
+#                 screen.blit(snake_frames[snake_index], obstacle_rect)
                 
-            else:                
-                #pygame.draw.rect(screen,'Blue',obstacle_rect)
-                # screen.blit(stirge_surface,obstacle_rect)               
-                screen.blit(stirge_frames[stirge_index], obstacle_rect)               
+#             else:                
+#                 #pygame.draw.rect(screen,'Blue',obstacle_rect)
+#                 # screen.blit(stirge_surface,obstacle_rect)               
+#                 screen.blit(stirge_frames[stirge_index], obstacle_rect)               
                 
         
         
-        obstacle_list = [obstacle for obstacle in obstacle_list if obstacle.x >- 100] #this piece of code deletes the snakes that go out of screen
-        # for obstacle in obstacle_list:
-        #     if obstacle.x >- 100:
-        #         aux.append(obstacle)
+#         obstacle_list = [obstacle for obstacle in obstacle_list if obstacle.x >- 100] #this piece of code deletes the snakes that go out of screen
+#         # for obstacle in obstacle_list:
+#         #     if obstacle.x >- 100:
+#         #         aux.append(obstacle)
 
-        return obstacle_list
-    else:
-         return []
-
-
-    if obstacle_list:
-        for obstacle_rect in obstacle_list:
-            if player_rect.x >= obstacle_rect:
-                score_value += 1
+#         return obstacle_list
+#     else:
+#          return []
 
 
 # def collisions(player,obstacles):
@@ -233,7 +215,7 @@ game_over = pygame.image.load('gameover.png').convert_alpha()
 score_surface = test_font.render('Score: ',False, 'Black')
 score_rect = score_surface.get_rect(topleft = (600 ,40))
 
-#timer
+# 
 timer_surface = test_font.render('Timer: ', False, 'Black') #text you want to display, anti anliasing(False or True) , color
 timer_rect = timer_surface.get_rect(topleft = (320,47 ))
 
