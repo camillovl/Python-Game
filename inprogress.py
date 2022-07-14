@@ -3,125 +3,62 @@ import pygame
 from sys import exit
 import random
 from random import randint,choice
+from player import Player 
+from ObstacleCorrection import Obstacle
 
 
-class Player(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        #Walking
-        player_surface1 = pygame.image.load('WalkSoldier\Soldado (1).png').convert_alpha()
-        player_surface2 = pygame.image.load('WalkSoldier\Soldado (2).png').convert_alpha()
-        player_surface3 = pygame.image.load('WalkSoldier\Soldado (3).png').convert_alpha()
-        player_surface4 = pygame.image.load('WalkSoldier\Soldado (4).png').convert_alpha()
 
-        self.player_walk = [player_surface1,player_surface2,player_surface3,player_surface4]
-        self.player_index = 0
-        #self.player_surface = player_walk[player_index]
+# class Obstacle(pygame.sprite.Sprite):
+#     def __init__(self,type):
+#         super().__init__()
 
-        self.image = self.player_walk[self.player_index]
-        self.rect = self.image.get_rect(bottomright = (200,550))
-        self.gravity = 0
+#         if type == 'stirge':
+#             stirge_frame1 = pygame.image.load('1.png').convert_alpha()
+#             stirge_frame1 = pygame.transform.scale(stirge_frame1,(50,50))
+#             stirge_frame2 = pygame.image.load('2.png').convert_alpha()      
+#             stirge_frame2 = pygame.transform.scale(stirge_frame2,(50,50))
 
-        #Jumping
-        player_jump1 = pygame.image.load('jumpSoldier\Tile050.png').convert_alpha
-        player_jump2 = pygame.image.load('jumpSoldier\Tile051.png').convert_alpha
-        player_jump3 = pygame.image.load('jumpSoldier\Tile052.png').convert_alpha
-        player_jump4 = pygame.image.load('jumpSoldier\Tile053.png').convert_alpha
+#             #stirge_index = 0
+#             self.frames = [stirge_frame1, stirge_frame2]
+#             #stirge_surface = stirge_frames[stirge_index]
+#             y_pos = 515
+#         else:
+#             snake_frame1 = pygame.image.load('Snake\Cobra 1.png').convert_alpha()
+#             snake_frame1 = pygame.transform.scale(snake_frame1,(40,40))
 
-        self.player_jump = [player_jump1,player_jump2,player_jump3,player_jump4]
-        self.player_index_jump = 0
-        #self.player_surface_jump = player_jump[player_index_jump]
-        
-        self.image_jump = self.player_jump[self.player_index_jump]
+#             snake_frame2 = pygame.image.load('Snake\Cobra 2.png').convert_alpha()
+#             snake_frame2 = pygame.transform.scale(snake_frame2,(40,40))
 
-        self.jump_sound = pygame.mixer.Sound('Jump.wav')
-        self.jump_sound.set_volume(0.5)
+#             snake_frame3 = pygame.image.load('Snake\Cobra 3.png').convert_alpha()
+#             snake_frame3 = pygame.transform.scale(snake_frame3,(40,40))
+
+#             snake_frame4 = pygame.image.load('Snake\Cobra 4.png').convert_alpha()
+#             snake_frame4 = pygame.transform.scale(snake_frame4,(40,40))
+
+#             #snake_index = 0
+#             self.frames = [snake_frame1, snake_frame2, snake_frame3, snake_frame4]
+#             #snake_surface = snake_frames[snake_index]
+#             y_pos = 550
+
+#         self.animation_index = 0
+#         self.image = self.frames[self.animation_index]
+#         self.rect = self.image.get_rect(midbottom = (random.randint(900,1100),y_pos))
     
-    
-    def player_animation(self):
+#     def animation_state(self):
+#         self.animation_index += 0.1
+#         if self.animation_index >=len(self.frames):
+#             self.animation_index = 0
+#         self.image = self.frames[int(self.animation_index)]
 
-        if self.rect.bottom < 550:
-            self.player_index_jump += 0.1
-        if self.player_index_jump >= len(self.player_jump):
-            self.player_index_jump = 0
-            self.player_image_jump = self.player_jump[int(self.player_index_jump)]
+#     def update(self):
+#         self.animation_state
+#         self.rect.x -= 6
+#         self.destroy()
 
-        else:
-            self.player_index += 0.1
-            if self.player_index >= len(self.player_walk):
-                self.player_index = 0
-            self.image = self.player_walk[int(self.player_index)]
+#     def destroy(self):
+#         if self.rect.x <= -100:
+#             self.kill()
 
-    def player_input(self):
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_SPACE] and self.rect.bottom >= 550:
-            self.gravity = -17
-            self.jump_sound.play()
-
-
-    
-    def apply_gravity(self):
-        self.gravity +=1
-        self.rect.y += self.gravity
-        if self.rect.bottom >= 550:
-            self.rect.bottom = 550
-    
-
-    def update(self):
-        self.player_input()
-        self.apply_gravity()
-        self.player_animation()
-
-class Obstacle(pygame.sprite.Sprite):
-    def __init__(self,type):
-        super().__init__()
-
-        if type == 'stirge':
-            stirge_frame1 = pygame.image.load('1.png').convert_alpha()
-            stirge_frame1 = pygame.transform.scale(stirge_frame1,(50,50))
-            stirge_frame2 = pygame.image.load('2.png').convert_alpha()      
-            stirge_frame2 = pygame.transform.scale(stirge_frame2,(50,50))
-
-            #stirge_index = 0
-            self.frames = [stirge_frame1, stirge_frame2]
-            #stirge_surface = stirge_frames[stirge_index]
-            y_pos = 515
-        else:
-            snake_frame1 = pygame.image.load('Snake\Cobra 1.png').convert_alpha()
-            snake_frame1 = pygame.transform.scale(snake_frame1,(40,40))
-
-            snake_frame2 = pygame.image.load('Snake\Cobra 2.png').convert_alpha()
-            snake_frame2 = pygame.transform.scale(snake_frame2,(40,40))
-
-            snake_frame3 = pygame.image.load('Snake\Cobra 3.png').convert_alpha()
-            snake_frame3 = pygame.transform.scale(snake_frame3,(40,40))
-
-            snake_frame4 = pygame.image.load('Snake\Cobra 4.png').convert_alpha()
-            snake_frame4 = pygame.transform.scale(snake_frame4,(40,40))
-
-            #snake_index = 0
-            self.frames = [snake_frame1, snake_frame2, snake_frame3, snake_frame4]
-            #snake_surface = snake_frames[snake_index]
-            y_pos = 550
-
-        self.animation_index = 0
-        self.image = self.frames[self.animation_index]
-        self.rect = self.image.get_rect(midbottom = (random.randint(900,1100),y_pos))
-    
-    def animation_state(self):
-        self.animation_index += 0.1
-        if self.animation_index >=len(self.frames):
-            self.animation_index = 0
-        self.image = self.frames[int(self.animation_index)]
-
-    def update(self):
-        self.animation_state
-        self.rect.x -= 6
-        self.destroy()
-
-    def destroy(self):
-        if self.rect.x <= -100:
-            self.kill()
 
 #creating a timer
 def display_timer():
@@ -157,12 +94,6 @@ def obstacle_movement(obstacle_list):
          return []
 
 
-    # if obstacle_list:
-    #     for obstacle_rect in obstacle_list:
-    #         if player_rect.x >= obstacle_rect:
-    #             score_value += 1
-
-
 def collision_sprite(): 
     if pygame.sprite.spritecollide(player.sprite,obstacle_group,False):#1sprite, 2group, boolean:checks if the sprite collides with the group will be destroyed or noit
     #this entire statment returns a list if doesnt collide with anything is gonna return an empity list
@@ -190,9 +121,13 @@ bg_music.play(loops = -1) #plays the sound 4ever
 
 #GROUPS
 player = pygame.sprite.GroupSingle() #this is a group single
-player.add(Player()) #this is a sprite
 
-obstacle_group = pygame.sprite.Group()
+#p1 = pygame.sprite.GroupSingle() #this is a group single
+p1 = Player() #instancia de jogador
+player.add(p1) #this is a sprite
+
+obstacle_group = pygame.sprite.GroupSingle()
+obstacle_group.add(Obstacle('snake',screen))
 
 
 background_surface = pygame.image.load('Backgrounds.png').convert_alpha() #converting an image to alpha facilitates pygame to read the code and make it lighter
@@ -251,35 +186,34 @@ stirge_surface = stirge_frames[stirge_index]
 #stirge_frames[stirge_index] = pygame.transform.scale(stirge_surface,(30,25))
 
 
-obstacle_rect_list = []
+#obstacle_rect_list = []
 
 #Player
 
 #Walking
-player_surface1 = pygame.image.load('WalkSoldier\Soldado (1).png').convert_alpha()
-player_surface2 = pygame.image.load('WalkSoldier\Soldado (2).png').convert_alpha()
-player_surface3 = pygame.image.load('WalkSoldier\Soldado (3).png').convert_alpha()
-player_surface4 = pygame.image.load('WalkSoldier\Soldado (4).png').convert_alpha()
-player_walk = [player_surface1,player_surface2,player_surface3,player_surface4]
-player_index = 0
+# player_surface1 = pygame.image.load('WalkSoldier\Soldado (1).png').convert_alpha()
+# player_surface2 = pygame.image.load('WalkSoldier\Soldado (2).png').convert_alpha()
+# player_surface3 = pygame.image.load('WalkSoldier\Soldado (3).png').convert_alpha()
+# player_surface4 = pygame.image.load('WalkSoldier\Soldado (4).png').convert_alpha()
+# player_walk = [player_surface1,player_surface2,player_surface3,player_surface4]
+# player_index = 0
 
-player_surface = player_walk[player_index]
+# player_surface = player_walk[player_index]
 
-#Jumping
-player_jump1 = pygame.image.load('jumpSoldier\Tile050.png').convert_alpha
-player_jump2 = pygame.image.load('jumpSoldier\Tile051.png').convert_alpha
-player_jump3 = pygame.image.load('jumpSoldier\Tile052.png').convert_alpha
-player_jump4 = pygame.image.load('jumpSoldier\Tile053.png').convert_alpha
-player_jump = [player_jump1,player_jump2,player_jump3,player_jump4]
-player_index_jump = 0
+# #Jumping
+# player_jump1 = pygame.image.load('jumpSoldier\Tile050.png').convert_alpha
+# player_jump2 = pygame.image.load('jumpSoldier\Tile051.png').convert_alpha
+# player_jump3 = pygame.image.load('jumpSoldier\Tile052.png').convert_alpha
+# player_jump4 = pygame.image.load('jumpSoldier\Tile053.png').convert_alpha
+# player_jump = [player_jump1,player_jump2,player_jump3,player_jump4]
+# player_index_jump = 0
 
-player_surface_jump = player_jump[player_index_jump]
+# player_surface_jump = player_jump[player_index_jump]
 
-#Player RECTANGLE
-player_rect = player_surface.get_rect(bottomright = (200,550)) #get the player surface and draws an rectangle around
-
-#Gravity
-player_gravity = 0
+# #Player RECTANGLE
+# player_rect = player_surface.get_rect(bottomright = (200,550)) #get the player surface and draws an rectangle around
+# #Gravity
+# player_gravity = 0
 
 #intro screen
 player_stand = pygame.image.load('WalkKing\Stand.png').convert_alpha()
@@ -292,14 +226,14 @@ intro_text = test_font.render('Press Enter to start the game', False, 'Black')
 intro_rect = intro_text.get_rect(center = (420,200))
 
 #Timer
-obstacle_timer = pygame.USEREVENT + 1
-pygame.time.set_timer(obstacle_timer,1400) # a timer ta trigger something every 900 miliseconds
+# obstacle_timer = pygame.USEREVENT + 1
+# pygame.time.set_timer(obstacle_timer,1400) # a timer ta trigger something every 900 miliseconds
 
-snake_animation_timer = pygame.USEREVENT + 2
-pygame.time.set_timer(snake_animation_timer,100)
+# snake_animation_timer = pygame.USEREVENT + 2
+# pygame.time.set_timer(snake_animation_timer,100)
 
-stirge_animation_timer = pygame.USEREVENT + 3
-pygame.time.set_timer(stirge_animation_timer,200)
+# stirge_animation_timer = pygame.USEREVENT + 3
+# pygame.time.set_timer(stirge_animation_timer,200)
 
 
 while True:
@@ -312,8 +246,9 @@ while True:
 
         if game_active == True:
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE and player_rect.bottom >= 550:
-                    player_gravity = -17
+                if event.key == pygame.K_SPACE and p1.rect.bottom >= 550:
+                    #player_gravity = -17
+                    p1.gravity = -17
             
             # code to clik on the player to jump if necessary
 
@@ -327,15 +262,15 @@ while True:
                     #snake_rect.left = 800
                     start_time = int(pygame.time.get_ticks() /100)
 
-        if game_active == True:
-            if event.type == obstacle_timer:
-                obstacle_group.add(Obstacle(choice(['stirge','snail','snail'])))
+        # if game_active == True:
+        #     if event.type == obstacle_timer:
+        #         obstacle_group.add(Obstacle(choice(['stirge','snake','snake'])))
     
-            if event.type == snake_animation_timer and game_active == True:
-                snake_index = (snake_index + 1) % 4
+            # if event.type == snake_animation_timer and game_active == True:
+            #     snake_index = (snake_index + 1) % 4
              
-            if event.type == stirge_animation_timer and game_active == True:
-                stirge_index = (stirge_index + 1) % 2
+            # if event.type == stirge_animation_timer and game_active == True:
+            #     stirge_index = (stirge_index + 1) % 2
 
                 
     if game_active == True:
@@ -373,19 +308,19 @@ while True:
     #Colision 
         game_active = collision_sprite()
         #simulating the colision with the floor
-        if player_rect.bottom >= 550:
-            player_rect.bottom = 550
+        if p1.rect.bottom >= 550:
+            p1.rect.bottom = 550
         
 
     if game_active == False:
         screen.fill((200,200,200))#the numbers mean colors
         screen.blit(player_stand,player_stand_rect)
         screen.blit(intro_text,intro_rect)
-        obstacle_rect_list.clear() #debug the colision to restart the game properly
+        #obstacle_rect_list.clear() #debug the colision to restart the game properly
        
         #these two following lines makes the character get back to the proper position when restarting the game
-        player_rect.midbottom = (80,550)
-        player_gravity = 0
+        p1.rect.midbottom = (80,550)
+        p1.gravity = 0
 
     #update 
     # everything
