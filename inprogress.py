@@ -5,7 +5,7 @@ import random
 from random import randint,choice
 from player import Player 
 from ObstacleCorrection import Obstacle
-from background import Backgroud
+from background import Background
 
 
 # class Obstacle(pygame.sprite.Sprite):
@@ -103,16 +103,16 @@ def collision_sprite():
         return True
         
 
-backgroud()
+
 #initializing pygame
 pygame.init()
 
 #Creating your screen and important variables
-# width = 800
-# height = 600
-#screen = pygame.display.set_mode((width,height)) #widht,height #(()) its a tuple
-#pygame.display.set_caption('MapleStory Wannabe') #setting the name of the game
-#clock = pygame.time.Clock()
+width = 800
+height = 600
+screen = pygame.display.set_mode((width,height)) #widht,height #(()) its a tuple
+pygame.display.set_caption('MapleStory Wannabe') #setting the name of the game
+clock = pygame.time.Clock()
 test_font = pygame.font.Font('Pixeltype.ttf',30) #font type and font size
 game_active = False
 start_time = 0
@@ -120,6 +120,9 @@ bg_music = pygame.mixer.Sound('backgroudmusic.wav')
 bg_music.set_volume(0.2)
 bg_music.play(loops = -1) #plays the sound 4ever
 
+
+#Background
+bg = Background(screen)
 
 #GROUPS
 player = pygame.sprite.GroupSingle() #this is a group single
@@ -278,9 +281,8 @@ while True:
     if game_active == True:
     #background
 
-        screen.blit(background_surface,(0,0))
-        #screen.fill((255,255,255))
-        #screen.blit(background_surface,(0,0))
+        bg.background_animation()
+        
     #Ground
         screen.blit(title0_surface,(0,550))  #blit is used when you want to put a surface in another surface    
         screen.blit(title1_surface,(128,550))  #blit is used when you want to put a surface in another surface    

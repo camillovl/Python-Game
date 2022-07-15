@@ -4,19 +4,17 @@ import math
 
 class Background():
   def __init__(self,screen):
-    super().__init__()
-    pygame.init()
 
     self.screen = screen
-    self.clock = pygame.time.Clock()
-    self.FPS = 60
+    #self.clock = pygame.time.Clock()
+    #self.FPS = 60
 
-    self.widht = 1500
+    self.widht = 800
     self.height = 600
 
     #create game window
-    self.screen = pygame.display.set_mode((self.widht, self.height))
-    pygame.display.set_caption("Endles Runner")
+    #self.screen = pygame.display.set_mode((self.widht, self.height))
+    #pygame.display.set_caption("Endles Runner")
 
     #load image
     self.bg = pygame.image.load("bg.jpg").convert()
@@ -28,10 +26,11 @@ class Background():
     self.tiles = math.ceil(self.widht  / self.bg_width) + 1
 
     #game loop
-    self.run = True
-    while self.run:
+    #self.run = True
+    #while self.run:
 
-      self.clock.tick(self.FPS)
+  def background_animation(self):
+      #self.clock.tick(self.FPS)
 
       #draw scrolling background
       for i in range(0, self.tiles):
@@ -51,6 +50,4 @@ class Background():
         if event.type == pygame.QUIT:
           self.run = False
 
-      pygame.display.update()
-
-    pygame.quit()
+      #pygame.display.update()

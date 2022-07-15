@@ -55,29 +55,35 @@ class Obstacle(pygame.sprite.Sprite):
         self.image = self.frames[int(self.obstacle_index)]
 
 
-    def obstacle_movement(self):
-        if obstacle_list:
-            for obstacle_rect in obstacle_list:
-                obstacle_rect.x -= 5
 
-            if self.type == 'stirge':
-                self.screen.blit(self.frames[self.obstacle_index], obstacle_rect)
+    # def obstacle_movement(self):
+        
+    #     obstacle1
+    #     obstacle2 = pygame.draw.rect(screen,)
+
+    # def obstacle_movement(self):
+    #     if obstacle_list:
+    #         for obstacle_rect in obstacle_list:
+    #             obstacle_rect.x -= 5
+
+    #         if self.type == 'stirge':
+    #             self.screen.blit(self.frames[self.obstacle_index], obstacle_rect)
                 
-            else:                
-                #pygame.draw.rect(screen,'Blue',obstacle_rect)
-                # screen.blit(stirge_surface,obstacle_rect)               
-                self.screen.blit(self.frames[self.obstacle_index], obstacle_rect)               
+    #         else:                
+    #             #pygame.draw.rect(screen,'Blue',obstacle_rect)
+    #             # screen.blit(stirge_surface,obstacle_rect)               
+    #             self.screen.blit(self.frames[self.obstacle_index], obstacle_rect)               
                 
         
         
-            obstacle_list = [obstacle for obstacle in obstacle_list if obstacle.x >- 100] #this piece of code deletes the snakes that go out of screen
-            # for obstacle in obstacle_list:
-            #     if obstacle.x >- 100:
-            #         aux.append(obstacle)
+    #         obstacle_list = [obstacle for obstacle in obstacle_list if obstacle.x >- 100] #this piece of code deletes the snakes that go out of screen
+    #         # for obstacle in obstacle_list:
+    #         #     if obstacle.x >- 100:
+    #         #         aux.append(obstacle)
 
-            return obstacle_list
-        else:
-            return []
+    #         return obstacle_list
+    #     else:
+    #         return []
 
     def update(self):
         #(choice(['stirge','snake','snake'])))
