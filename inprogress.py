@@ -5,7 +5,7 @@ import random
 from random import randint,choice
 from player import Player 
 from ObstacleCorrection import Obstacle
-
+from background import Backgroud
 
 
 # class Obstacle(pygame.sprite.Sprite):
@@ -102,15 +102,17 @@ def collision_sprite():
     else:
         return True
         
+
+backgroud()
 #initializing pygame
 pygame.init()
 
 #Creating your screen and important variables
-width = 800
-height = 600
-screen = pygame.display.set_mode((width,height)) #widht,height #(()) its a tuple
-pygame.display.set_caption('MapleStory Wannabe') #setting the name of the game
-clock = pygame.time.Clock()
+# width = 800
+# height = 600
+#screen = pygame.display.set_mode((width,height)) #widht,height #(()) its a tuple
+#pygame.display.set_caption('MapleStory Wannabe') #setting the name of the game
+#clock = pygame.time.Clock()
 test_font = pygame.font.Font('Pixeltype.ttf',30) #font type and font size
 game_active = False
 start_time = 0
