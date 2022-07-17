@@ -7,7 +7,7 @@ class Score():
     def __init__(self,screen):
         self.font = pygame.font.Font('freesansbold.ttf',70)
         self.screen = screen
-        self.actual_score = None
+        self.actual_score = 0
         self.high_score = 0
         #self.score_message = self.font.render('PONTOS',False, 'Black')
         #self.score_message_rect = self.score_message.get_rect(topleft = (600 ,40))
