@@ -284,8 +284,8 @@ while True:
         bg.background_animation()
         
     #Ground
-        screen.blit(title1_surface,(128,550))  #blit is used when you want to put a surface in another surface    
         screen.blit(title0_surface,(0,550))  #blit is used when you want to put a surface in another surface    
+        screen.blit(title1_surface,(128,550))  #blit is used when you want to put a surface in another surface    
         screen.blit(title2_surface,(256,550))  #blit is used when you want to put a surface in another surface    
         screen.blit(title3_surface,(384,550))  #blit is used when you want to put a surface in another surface    
         screen.blit(title4_surface,(512,550))  #blit is used when you want to put a surface in another surface    
