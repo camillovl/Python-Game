@@ -5,9 +5,16 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         #Walking
         player_surface1 = pygame.image.load('WalkSoldier\Soldado (1).png').convert_alpha()
+        player_surface1 = pygame.transform.scale(player_surface1,(50,50))
+
         player_surface2 = pygame.image.load('WalkSoldier\Soldado (2).png').convert_alpha()
+        player_surface2 = pygame.transform.scale(player_surface2,(50,50))
+
         player_surface3 = pygame.image.load('WalkSoldier\Soldado (3).png').convert_alpha()
+        player_surface3 = pygame.transform.scale(player_surface3,(50,50))
+
         player_surface4 = pygame.image.load('WalkSoldier\Soldado (4).png').convert_alpha()
+        player_surface4 = pygame.transform.scale(player_surface4,(50,50))
 
         self.player_walk = [player_surface1,player_surface2,player_surface3,player_surface4]
         self.player_index = 0
@@ -18,10 +25,17 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 0
 
         #Jumping
-        player_jump1 = pygame.image.load('jumpSoldier\Tile050.png').convert_alpha
-        player_jump2 = pygame.image.load('jumpSoldier\Tile051.png').convert_alpha
-        player_jump3 = pygame.image.load('jumpSoldier\Tile052.png').convert_alpha
-        player_jump4 = pygame.image.load('jumpSoldier\Tile053.png').convert_alpha
+        player_jump1 = pygame.image.load('jumpSoldier\Tile050.png').convert_alpha()
+        player_jump1 = pygame.transform.scale(player_jump1,(50,50))
+
+        player_jump2 = pygame.image.load('jumpSoldier\Tile051.png').convert_alpha()
+        player_jump2 = pygame.transform.scale(player_jump2,(50,50))
+
+        player_jump3 = pygame.image.load('jumpSoldier\Tile052.png').convert_alpha()
+        player_jump3 = pygame.transform.scale(player_jump3,(50,50))
+
+        player_jump4 = pygame.image.load('jumpSoldier\Tile053.png').convert_alpha()
+        player_jump4 = pygame.transform.scale(player_jump4,(50,50))
 
         self.player_jump = [player_jump1,player_jump2,player_jump3,player_jump4]
         self.player_index_jump = 0
